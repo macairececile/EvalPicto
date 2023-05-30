@@ -15,13 +15,13 @@ import {EvalExitComponent} from "./components/eval_exit/eval_exit.component";
 const routes: Routes = [
   {path: 'print', component:SelectPictoComponent},
   {path: 'picto', component:TranslatePictoComponent},
-  {path: 'post_edition_home', component:PostEditionHomeComponent},
-  {path: 'post_edition', component:PostEditionComponent},
-  {path: 'post_edition_exit', component:PostEditionExitComponent},
-  {path: 'annot_vocab', component:AnnotVocabComponent},
-  {path: 'eval_home', component:EvalHomeComponent},
-  {path: 'eval', component:EvalComponent},
-  {path: 'eval_exit', component:EvalExitComponent},
+  {path: 'postEditPictoHome', component:PostEditionHomeComponent},
+  {path: 'postEditPicto', component:PostEditionComponent},
+  {path: 'postEditPictoExit', component:PostEditionExitComponent},
+  {path: 'dicoPicto', component:AnnotVocabComponent},
+  {path: 'evalPictoHome', component:EvalHomeComponent},
+  {path: 'evalPicto', component:EvalComponent},
+  {path: 'evalPictoExit', component:EvalExitComponent},
   {path: 'admin', component:AdminComponent},
   {path: '', redirectTo:'picto', pathMatch: 'full'}
 ];

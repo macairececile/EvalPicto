@@ -396,6 +396,11 @@ function mkdirAnnotVocab(data,callback,error){
   this._phoneHome(path, callback, error);
 }
 
+function mkdirEval(data,callback,error){
+  let path = ['mkdirEval', dataJS];
+  this._phoneHome(path, callback, error);
+}
+
 function setDataTS(value){
   dataJS = value;
 }

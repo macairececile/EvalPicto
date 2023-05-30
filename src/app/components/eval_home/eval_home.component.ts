@@ -17,7 +17,7 @@ export class EvalHomeComponent implements OnInit {
 
     goToPage(): void {
         if(this.is_checked) {
-            this.router.navigate(['eval']);
+            this.router.navigate(['evalPicto']);
         }
     };
 

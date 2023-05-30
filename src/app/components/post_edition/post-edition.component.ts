@@ -322,7 +322,7 @@ export class PostEditionComponent implements OnInit {
     this.saveUsersDataToServer(index, sentence);
     console.log(pictos);
     if (index + 2 > this.num_sentences){
-      this.router.navigate(['post_edition_exit']);
+      this.router.navigate(['PostEditPictoExit']);
     }
     else{
       this.pictosVisibility.fill(true);
@@ -336,7 +336,7 @@ export class PostEditionComponent implements OnInit {
 
   quitStudy(index: number, sentence:string): void {
     this.saveUsersDataToServer(index, sentence);
-    this.router.navigate(['post_edition_exit']);
+    this.router.navigate(['postEditPictoExit']);
   }
 
 }

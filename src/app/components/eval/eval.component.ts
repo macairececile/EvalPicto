@@ -335,7 +335,7 @@ export class EvalComponent implements OnInit {
     goToNextTask(index: number, sentence: string, pictos: string) {
         this.saveUsersDataToServer(index, sentence);
         if (index + 2 > this.num_sentences) {
-            this.router.navigate(['eval_exit']);
+            this.router.navigate(['evalPictoExit']);
         } else {
             this.showQuestions = true;
             this.postEdit = false;
@@ -350,7 +350,7 @@ export class EvalComponent implements OnInit {
 
     quitStudy(index: number, sentence: string): void {
         this.saveUsersDataToServer(index, sentence);
-        this.router.navigate(['eval_exit']);
+        this.router.navigate(['evalPictoExit']);
     }
 
     question1_checked(num: number, index: number) {

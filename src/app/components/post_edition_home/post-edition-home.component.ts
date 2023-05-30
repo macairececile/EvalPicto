@@ -17,7 +17,7 @@ export class PostEditionHomeComponent implements OnInit {
 
   goToPage(): void {
     if(this.is_checked) {
-      this.router.navigate(['post_edition']);
+      this.router.navigate(['postEditPicto']);
     }
   };
 
