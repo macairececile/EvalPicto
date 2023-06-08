@@ -20,8 +20,10 @@ var dirs = {
 	pictograms: 'pictograms/',
 	sessions: 'sessions/',
 	annotVocab: 'requestsAnnotVocab/',
-	postEdition: 'requestsPostEdition',
+	postEdition: 'requestsPostEdition/',
 	eval: 'requestEval/',
+	//add path to login file
+	login: ''
 };
 
 // pictogram banks
@@ -264,6 +266,19 @@ function mkdirEval(value){
 		if (err) throw err;
 		console.log('Fichier créé !');
 	});
+}
+
+function checkLogin(r){
+ 	const listAccounts = [];
+
+	 fs.readFile(dirs.login,  'utf8', function (err, jsonString){
+		 if (err) {
+			 return console.log('Unable to scan directory: ' + err);
+		 }
+		 let data = JSON.parse(jsonString);
+		 listAccounts.push(data);
+		 r.send(listAccounts);
+	 });
 }
 
 function getAllAnnotVocabRequest(r){
@@ -721,6 +736,10 @@ app.get('/removeAnnotVocabRequest/:data', (q, r) => {
 app.get('/removePostEditionRequest/:data', (q, r) => {
 	let data = q.params.data;
 	r.send(removePostEditionRequest(data));
+});
+
+app.get('/pwd', (q, r) => {
+	checkLogin(r);
 });
 
 // DIRECT DATA ACCESS

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="margin">
   <h2> {{'translatePicto.bankImage' | translate}} </h2>
-  <form (change)="chooseBank(arasaac, mulberry)">
+  <form (change)="chooseBank(arasaac, mulberry, lema)">
     <div>
       <p>
         <input #arasaac type="checkbox" id="arasaac" name="arasaac" value="arasaac" [checked]="true">
@@ -10,6 +10,10 @@
       <p>
         <input #mulberry type="checkbox" id="mulberry" name="mulberry" value="mulberry" [checked]="true">
         <label for="mulberry"><span class="ui"></span>Mulberry</label>
+      </p>
+      <p>
+        <input #lema type="checkbox" id="lema" name="lema" value="lema" [checked]="true">
+        <label for="lema"><span class="ui"></span>Lemmatisation</label>
       </p>
     </div>
     <br>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {EditionService} from "../../services/edition-service";
 
 declare var getAllAnnotVocabRequest:any;
 declare var getAnnotVocabRequest:any;
@@ -13,7 +15,7 @@ declare var removePostEditionRequest:any;
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent{
+export class AdminComponent implements OnInit{
 
   numberOfTry: number = 5;
   allRequests: string[][][] = [];
@@ -27,7 +29,14 @@ export class AdminComponent{
   requestType: string = "";
   newRequest: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router,
+              private editionService: EditionService) { }
+
+  ngOnInit() {
+    /*if (!this.editionService.logged){
+      this.router.navigate(['login']);
+    }*/
+  }
 
   doAnewRequest(){
     window.location.reload();

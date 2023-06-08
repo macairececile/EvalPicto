@@ -73,8 +73,12 @@ export class EvalComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.editionService.isSearch = false;
-        this.goLoad("sentences_eval.json");
+        if (!this.editionService.logged){
+            this.router.navigate(['evalPictoHome']);
+        }else {
+            this.editionService.isSearch = false;
+            this.goLoad("sentences_eval.json");
+        }
     }
 
     onSubmit(formText: NgForm) {

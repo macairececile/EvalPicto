@@ -26,6 +26,7 @@ var dataJS = "Salut";
 var dataLemma = [""];
 var requestAnnotVocab = [];
 var requestPostEdition = [];
+var requestLogin = [];
 
 var internationalization = {
   'fra': {
@@ -250,12 +251,23 @@ function lemmaText(value){
 }
 
 function setLemmaText(value){
-  console.log('set lemma: ' + value);
   dataLemma = value;
 }
 
 function getLemmaText(){
   return dataLemma;
+}
+
+function logged(){
+  checkLogin(setLogin);
+}
+
+function setLogin(value){
+  requestLogin = value;
+}
+
+function getLogin(){
+  return requestLogin;
 }
 
 //request to the server at url
@@ -320,6 +332,19 @@ function _phoneHomePostEdition(path, callback, error){
   xhr.addEventListener('load', (e) => {
     let xhr = e.target;
     if (xhr.status == 200) setPostEditionRequest(xhr.response);
+    else error(undefined, xhr.response);
+  });
+  xhr.open('GET', 'https://lig-interaactionpicto.imag.fr/api/' + path.join('/'));
+  xhr.send(null);
+}
+
+function _phoneHomeLogin(path, callback, error){
+
+  if (error === undefined) error = callback;
+  let xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', (e) => {
+    let xhr = e.target;
+    if (xhr.status == 200) setLogin(xhr.response);
     else error(undefined, xhr.response);
   });
   xhr.open('GET', 'https://lig-interaactionpicto.imag.fr/api/' + path.join('/'));
@@ -399,6 +424,11 @@ function mkdirAnnotVocab(data,callback,error){
 function mkdirEval(data,callback,error){
   let path = ['mkdirEval', dataJS];
   this._phoneHome(path, callback, error);
+}
+
+function checkLogin(callback,error){
+  let path = ['pwd'];
+  this._phoneHomeLogin(path, callback, error);
 }
 
 function setDataTS(value){

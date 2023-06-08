@@ -37,4 +37,6 @@ export class EditionService {
 
   borderSize:number = 5;
 
+  logged:boolean = false;
+
 }

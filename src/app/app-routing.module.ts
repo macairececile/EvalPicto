@@ -11,6 +11,7 @@ import {EvalHomeComponent} from "./components/eval_home/eval_home.component";
 import {EvalComponent} from "./components/eval/eval.component";
 import {AdminComponent} from "./components/admin/admin.component";
 import {EvalExitComponent} from "./components/eval_exit/eval_exit.component";
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   {path: 'print', component:SelectPictoComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'evalPicto', component:EvalComponent},
   {path: 'evalPictoExit', component:EvalExitComponent},
   {path: 'admin', component:AdminComponent},
+  {path: 'login', component:LoginComponent},
   {path: '', redirectTo:'picto', pathMatch: 'full'}
 ];
 

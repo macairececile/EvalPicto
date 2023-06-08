@@ -27,6 +27,7 @@ export class TranslatePictoComponent implements OnInit {
   cellsToScroll:number = 4;
   wordSearch:string = '';
   banksChecked:string[] = ['arasaac', 'mulberry'];
+  wantLema:boolean = true;
   wordsText: any;
   keyPicto:string[][] = [];
   dataRegisterChecked: boolean = true;
@@ -48,22 +49,25 @@ export class TranslatePictoComponent implements OnInit {
       this.resetRequest();
       this.wordSearch = this.getTextWhitoutChariot(formText.form.value.text);
       const numberOfWord = this.wordSearch.split(' ');
-      console.log(numberOfWord);
       this.editionService.wordsSearchTab = numberOfWord;
       if(numberOfWord.length > 50){
         this.openDialog();
         return;
       }
-      let textLemma: string[] = [""];
-      lemmaText(this.wordSearch);
-      let lemmaTextInterval = setInterval(() => {
-        if (textLemma[0] == ""){
-          textLemma = getLemmaText();
-        }else {
-          clearInterval(lemmaTextInterval);
-          this.getPicto(numberOfWord, textLemma);
-        }
-      }, 2000);
+      if (this.wantLema){
+        let textLemma: string[] = [""];
+        lemmaText(this.wordSearch);
+        let lemmaTextInterval = setInterval(() => {
+          if (textLemma[0] == ""){
+            textLemma = getLemmaText();
+          }else {
+            clearInterval(lemmaTextInterval);
+            this.getPicto(numberOfWord, textLemma);
+          }
+        }, 2000);
+      }else {
+        this.getPicto(numberOfWord, this.wordSearch);
+      }
     }
   }
 
@@ -98,7 +102,7 @@ export class TranslatePictoComponent implements OnInit {
         this.editionService.imageSelected.push('null');
       });
       this.duplicateCaseKey(this.keyPicto);
-    },numberOfWord.length * 3000);
+    },numberOfWord.length * 2000);
   }
 
   convertTextToString(text: any){
@@ -120,18 +124,24 @@ export class TranslatePictoComponent implements OnInit {
     }
   }
 
-  chooseBank(arasaac: HTMLInputElement, mulberry: HTMLInputElement) {
+  chooseBank(arasaac: HTMLInputElement, mulberry: HTMLInputElement, lema: HTMLInputElement) {
     if(!arasaac.checked){
       this.banksChecked = this.banksChecked.filter((bank) => bank != arasaac.value);
     }
     if(!mulberry.checked){
       this.banksChecked = this.banksChecked.filter((bank) => bank != mulberry.value);
     }
+    if(!lema.checked){
+      this.wantLema = false;
+    }
     if(arasaac.checked){
       this.banksChecked.push(arasaac.value);
     }
     if(mulberry.checked){
       this.banksChecked.push(mulberry.value);
+    }
+    if(lema.checked){
+      this.wantLema = true;
     }
   }
 

@@ -34,6 +34,7 @@ import {EvalExitComponent} from "./components/eval_exit/eval_exit.component";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
@@ -54,7 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     EvalHomeComponent,
     EvalComponent,
     EvalExitComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     TranslateModule.forRoot({
