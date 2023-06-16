@@ -158,7 +158,6 @@ function relevanceComparator(a, b) {
 // pictograms in "libraries".
 function pictogramsReceived(pictograms, indexPictos) {
   let expressions = {};
-  console.log(pictograms);
   for (let p in pictograms) {
     let pictoData = pictograms[p];
     let count = pictoData.shift();
@@ -183,7 +182,7 @@ function pictogramsReceived(pictograms, indexPictos) {
     pictograms.sort(relevanceComparator);
     for (let p in pictograms) {
       let url = 'https://lig-interaactionpicto.imag.fr/api/' + pictograms[p][1];
-      if (!urlImageJS[0].includes(url)){
+      /*if (!urlImageJS[0].includes(url)){
         let picto = document.createElement('img');
         picto.src = url;
         picto.draggable = true;
@@ -191,7 +190,14 @@ function pictogramsReceived(pictograms, indexPictos) {
         picto.dataset.url = url;
         urlImageJS[indexPictos].push(url);
         keyImageJS[indexPictos].push(key);
-      }
+      }*/
+      let picto = document.createElement('img');
+      picto.src = url;
+      picto.draggable = true;
+      picto.dataset.key = key;
+      picto.dataset.url = url;
+      urlImageJS[indexPictos].push(url);
+      keyImageJS[indexPictos].push(key);
     }
   }
 }

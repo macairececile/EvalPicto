@@ -64,7 +64,7 @@ export class TranslatePictoComponent implements OnInit {
             clearInterval(lemmaTextInterval);
             this.getPicto(numberOfWord, textLemma);
           }
-        }, 2000);
+        }, 200);
       }else {
         this.getPicto(numberOfWord, this.wordSearch);
       }
@@ -76,6 +76,7 @@ export class TranslatePictoComponent implements OnInit {
     setTimeout(()=> {
       this.loading = false;
       this.result = getUrlPicto();
+      this.checkDoublon();
       this.editionService.result = this.result;
       this.keyPicto = getKeyPicto();
       for (let i=0; i<this.result.length; i = i+1){
@@ -101,17 +102,16 @@ export class TranslatePictoComponent implements OnInit {
       numberOfWord.forEach(word => {
         this.editionService.imageSelected.push('null');
       });
-      this.duplicateCaseKey(this.keyPicto);
-    },numberOfWord.length * 2000);
+      //this.duplicateCaseKey(this.keyPicto);
+    },numberOfWord.length * 200);
   }
 
   convertTextToString(text: any){
     text = text.replace("[", "");
     text = text.replace("]", "");
     text = text.replaceAll("'", "");
-    text = text.replace(',', "");
+    text = text.replaceAll(',', "");
     text = this.getTextWhitoutChariot(text);
-    console.log(text.split(" "));
     return text;
   }
 
@@ -270,5 +270,19 @@ export class TranslatePictoComponent implements OnInit {
       this.result.splice(index,1);
       this.displayResult.splice(index,1);
     });
+  }
+
+  checkDoublon(){
+    let tmpDisplayTab: string[][] = [];
+    this.result.forEach(tab => {
+      let listImg: string[] = [];
+      tab.forEach(value => {
+        if (!listImg.includes(value)){
+          listImg.push(value);
+        }
+      });
+      tmpDisplayTab.push(listImg);
+    });
+    this.result = tmpDisplayTab;
   }
 }

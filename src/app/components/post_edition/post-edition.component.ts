@@ -87,7 +87,7 @@ export class PostEditionComponent implements OnInit {
           clearInterval(lemmaTextInterval);
           this.getPicto(numberOfWord, textLemma);
         }
-      }, 2000);
+      }, 200);
     }
   }
 
@@ -96,6 +96,7 @@ export class PostEditionComponent implements OnInit {
     setTimeout(()=> {
       this.loading = false;
       this.result = getUrlPicto();
+      this.checkDoublon();
       this.editionService.result = this.result;
       this.keyPicto = getKeyPicto();
       for (let i=0; i<this.result.length; i = i+1){
@@ -121,17 +122,16 @@ export class PostEditionComponent implements OnInit {
       numberOfWord.forEach(word => {
         this.editionService.imageSelected.push('null');
       });
-      this.duplicateCaseKey(this.keyPicto);
-    },numberOfWord.length * 3000);
+      //this.duplicateCaseKey(this.keyPicto);
+    },numberOfWord.length * 200);
   }
 
   convertTextToString(text: any){
     text = text.replace("[", "");
     text = text.replace("]", "");
     text = text.replaceAll("'", "");
-    text = text.replace(',', "");
+    text = text.replaceAll(',', "");
     text = this.getTextWhitoutChariot(text);
-    console.log(text.split(" "));
     return text;
   }
 
@@ -339,4 +339,17 @@ export class PostEditionComponent implements OnInit {
     this.router.navigate(['postEditPictoExit']);
   }
 
+  checkDoublon(){
+    let tmpDisplayTab: string[][] = [];
+    this.result.forEach(tab => {
+      let listImg: string[] = [];
+      tab.forEach(value => {
+        if (!listImg.includes(value)){
+          listImg.push(value);
+        }
+      });
+      tmpDisplayTab.push(listImg);
+    });
+    this.result = tmpDisplayTab;
+  }
 }

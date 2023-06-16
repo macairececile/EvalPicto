@@ -1,17 +1,15 @@
 import sys
-import fr_core_news_sm
+import socket
 
-nlp = fr_core_news_sm.load(exclude=["ner"])
-nlp.get_pipe("lemmatizer").lookups.get_table("lemma_rules")["verb"] += [['e', 'er'], ['ent', 'er']
-nlp.get_pipe("lemmatizer").cache = {}
-doc = nlp(sys.argv[1])
-textLemma = []
-lemmaTags = {"VERB"}
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-for token in doc:
-    if token.tag_ in lemmaTags:
-        textLemma.append(token.lemma_)
-    else:
-        textLemma.append(token.text)
-
-print(textLemma)
+try :
+    client.connect(('localhost', 9999))
+    info = sys.argv[1]
+    info = info.encode("utf8")
+    client.sendall(info)
+    response = client.recv(1024)
+    response = response.decode("utf8")
+    print(eval(response))
+finally :
+    client.close()

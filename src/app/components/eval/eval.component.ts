@@ -101,7 +101,7 @@ export class EvalComponent implements OnInit {
                     clearInterval(lemmaTextInterval);
                     this.getPicto(numberOfWord, textLemma);
                 }
-            }, 2000);
+            }, 200);
         }
     }
 
@@ -110,8 +110,8 @@ export class EvalComponent implements OnInit {
         setTimeout(() => {
             this.loading = false;
             this.result = getUrlPicto();
+            this.checkDoublon();
             this.editionService.result = this.result;
-            console.log(this.keyPicto);
             for (let i = 0; i < this.result.length; i = i + 1) {
                 this.result[i].forEach(value => {
                     const tabValue = value.split('/');
@@ -135,8 +135,8 @@ export class EvalComponent implements OnInit {
             numberOfWord.forEach(word => {
                 this.editionService.imageSelected.push('null');
             });
-            this.duplicateCaseKey(this.keyPicto);
-        }, numberOfWord.length * 3000);
+            //this.duplicateCaseKey(this.keyPicto);
+        }, numberOfWord.length * 200);
     }
 
     convertTextToString(text: any) {
@@ -145,7 +145,6 @@ export class EvalComponent implements OnInit {
         text = text.replaceAll("'", "");
         text = text.replace(',', "");
         text = this.getTextWhitoutChariot(text);
-        console.log(text.split(" "));
         return text;
     }
 
@@ -417,5 +416,19 @@ export class EvalComponent implements OnInit {
             this.id_annot_fill = true;
             console.log(this.id_annot);
         }
+    }
+
+    checkDoublon(){
+        let tmpDisplayTab: string[][] = [];
+        this.result.forEach(tab => {
+            let listImg: string[] = [];
+            tab.forEach(value => {
+                if (!listImg.includes(value)){
+                    listImg.push(value);
+                }
+            });
+            tmpDisplayTab.push(listImg);
+        });
+        this.result = tmpDisplayTab;
     }
 }
