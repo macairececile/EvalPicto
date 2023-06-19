@@ -1,9 +1,11 @@
 import sys
+import time
 import socket
+import subprocess
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-try :
+def request():
     client.connect(('localhost', 9999))
     info = sys.argv[1]
     info = info.encode("utf8")
@@ -11,5 +13,15 @@ try :
     response = client.recv(1024)
     response = response.decode("utf8")
     print(eval(response))
+
+def relaunchServer():
+    subprocess.run(["python3", "./serverLemma.py", "&"])
+
+try :
+    request()
+except :
+    relaunchServer()
+    time.sleep(10)
+    request()
 finally :
     client.close()
