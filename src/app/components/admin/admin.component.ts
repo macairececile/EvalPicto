@@ -33,9 +33,10 @@ export class AdminComponent implements OnInit{
               private editionService: EditionService) { }
 
   ngOnInit() {
-    /*if (!this.editionService.logged){
+    if (!this.editionService.logged){
+      this.editionService.accessPage = 'login';
       this.router.navigate(['login']);
-    }*/
+    }
   }
 
   doAnewRequest(){

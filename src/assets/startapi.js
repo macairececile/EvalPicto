@@ -195,7 +195,8 @@ function mkdirPostEdition(value){
 	var doc = {document:{
 			name:'request'+dateNow+'.json',
 			date: date,
-			text: value[0],
+			user: value[0],
+			text: value[1],
 			picto: idPictos,
 			version: '10 février 2023'
 		}};
@@ -210,17 +211,17 @@ function mkdirPostEdition(value){
 
 function mkdirAnnotVocab(value){
 	value = value.split(',');
-	var text = value[0];
-	var id = value[1];
 
 	var date = new Date();
 	var dateNow = Date.now().toString();
 	date = date.toLocaleDateString();
+
 	var doc = {
 		name:'requestsAnnotVocab'+dateNow+'.json',
 		date: date,
-		text: text,
-		picto: id,
+		user: value[0],
+		text: value[1],
+		picto: value[2],
 		version: '10 février 2023'
 	};
 	doc = JSON.stringify(doc);
@@ -236,12 +237,8 @@ function mkdirEval(value){
 	value = replaceAllElem(value);
 	value = value.split(',');
 
-	var id_annot = value[0];
-	var quest1 = value[1];
-	var quest2 = value[2];
-
 	let idPictos = "";
-	for (let i=4; i<value.length; i++){
+	for (let i=5; i<value.length; i++){
 		idPictos += value[i] + ", ";
 	}
 
@@ -252,10 +249,11 @@ function mkdirEval(value){
 	var doc = {document:{
 			name:'request'+dateNow+'.json',
 			date: date,
-			id_annot: id_annot,
-			quest1: quest1,
-			quest2: quest2,
-			text: value[3],
+			user: value[0],
+			id_annot: value[1],
+			quest1: value[2],
+			quest2: value[3],
+			text: value[4],
 			picto: idPictos,
 			version: '10 février 2023'
 		}};

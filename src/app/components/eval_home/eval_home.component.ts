@@ -16,6 +16,7 @@ export class EvalHomeComponent implements OnInit {
 
     ngOnInit(): void {
         if (!this.editionService.logged){
+            this.editionService.accessPage = "evalPictoHome";
             this.router.navigate(['login']);
         }
     }

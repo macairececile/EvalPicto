@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {EditionService} from "../../services/edition-service";
+import {SaveDataService} from "../../services/save-data.service";
 
 declare var checkLogin:any;
 declare var getLogin:any;
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   errorMessage: String = "";
 
   constructor(private router: Router,
-              private editionService: EditionService) { }
+              private editionService: EditionService,
+              private saveDataService: SaveDataService) { }
 
   ngOnInit(): void {
   }
@@ -82,8 +84,9 @@ export class LoginComponent implements OnInit {
   next(value: boolean){
     if (value){
       this.editionService.logged = true;
+      this.saveDataService.userLogged = this.account;
       this.reset();
-      history.back();
+      this.router.navigate([this.editionService.accessPage]);
     }else {
       this.showError = true;
       this.errorMessage = "Nom de compte ou mot de passe invalide !";

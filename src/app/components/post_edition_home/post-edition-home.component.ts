@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {EditionService} from "../../services/edition-service";
 
 @Component({
   selector: 'app-post-edition-home',
@@ -10,9 +11,14 @@ export class PostEditionHomeComponent implements OnInit {
 
   is_checked: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private editionService: EditionService) { }
 
   ngOnInit(): void {
+    if (!this.editionService.logged){
+      this.editionService.accessPage = "postEditPictoHome";
+      this.router.navigate(['login']);
+    }
   }
 
   goToPage(): void {

@@ -39,4 +39,6 @@ export class EditionService {
 
   logged:boolean = false;
 
+  accessPage:string = '';
+
 }

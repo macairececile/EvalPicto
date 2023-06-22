@@ -22,20 +22,11 @@
                 Chaque phrase est présentée une par une. Pour passer à la suivante, cliquez sur "Valider la traduction".
                 Il est possible de quitter la tâche à tout moment, en cliquant sur le bouton "Quitter".
             </p>
-            <br/>
-            <form class="p-3" #formText="ngForm" (submit)="onSubmitUsername(formText);">
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Username :</label>
-                    <div class="col-sm-2">
-                        <input class="form-control" type="text" id="username" placeholder="Marie" name="username"
-                               [(ngModel)]="formText.name">
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="submit" class="btn btn-primary mb-2">Valider</button>
-                    </div>
-                </div>
-            </form>
-            <div *ngIf="id_annot_fill == true">
+            <div>
+                <label class="col-sm-2 col-form-label">{{'Username: ' + this.user}}</label>
+            </div>
+            <br>
+            <div>
                 <div *ngFor="let s of sentences; let index = index">
                     <div class="card border-warning" [hidden]="pictosVisibility[index]">
                         <div class="card-header text-dark bg-warning">

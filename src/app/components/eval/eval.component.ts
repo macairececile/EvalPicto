@@ -64,6 +64,7 @@ export class EvalComponent implements OnInit {
     answer_quest2: boolean[] = [];
     showError: boolean = false;
     showQuestions:boolean = true;
+    user:string = "";
 
     constructor(public languageService: LanguageService,
                 public editionService: EditionService,
@@ -74,10 +75,12 @@ export class EvalComponent implements OnInit {
 
     ngOnInit(): void {
         if (!this.editionService.logged){
+            this.editionService.accessPage = "evalPicto"
             this.router.navigate(['evalPictoHome']);
         }else {
             this.editionService.isSearch = false;
             this.goLoad("sentences_eval.json");
+            this.user = this.saveData.userLogged;
         }
     }
 
@@ -330,7 +333,7 @@ export class EvalComponent implements OnInit {
 
     saveUsersDataToServer(index: number, sentence: string) {
         let urlPictoDataSelected: string[] = JSON.parse(JSON.stringify(this.pictos));
-        const data = [[this.id_annot], [this.answer_quest1[index]], [this.answer_quest2[index]], [sentence], [urlPictoDataSelected]];
+        const data = [[this.saveData.userLogged], [this.id_annot], [this.answer_quest1[index]], [this.answer_quest2[index]], [sentence], [urlPictoDataSelected]];
         setDataTS(data);
         mkdirEval();
     }

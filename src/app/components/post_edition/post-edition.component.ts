@@ -63,8 +63,13 @@ export class PostEditionComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.editionService.isSearch = false;
-    this.goLoad("sentences.json");
+    if (!this.editionService.logged){
+      this.editionService.accessPage = "postEditPicto";
+      this.router.navigate(['login']);
+    }else {
+      this.editionService.isSearch = false;
+      this.goLoad("sentences.json");
+    }
   }
 
   onSubmit(formText: NgForm) {
@@ -313,7 +318,7 @@ export class PostEditionComponent implements OnInit {
 
   saveUsersDataToServer(index: number, sentence:string){
     let urlPictoDataSelected : string[] = JSON.parse(JSON.stringify(this.pictos));
-    const data = [[sentence], [urlPictoDataSelected]];
+    const data = [[this.saveData.userLogged], [sentence], [urlPictoDataSelected]];
     setDataTS(data);
     mkdirPostEdition();
   }

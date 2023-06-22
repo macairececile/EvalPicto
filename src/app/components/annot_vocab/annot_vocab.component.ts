@@ -62,8 +62,13 @@ export class AnnotVocabComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.editionService.isSearch = false;
-    this.goLoad("sentences.json");
+    if (!this.editionService.logged){
+      this.editionService.accessPage = "dicoPicto";
+      this.router.navigate(['login']);
+    }else {
+      this.editionService.isSearch = false;
+      this.goLoad("sentences.json");
+    }
   }
 
   onSubmit(formText: NgForm) {
@@ -295,7 +300,7 @@ export class AnnotVocabComponent implements OnInit {
   }
 
   saveUsersDataToServer(index: string, text:string){
-    const data = [[text], [index]];
+    const data = [[this.saveData.userLogged], [text], [index]];
     setDataTS(data);
     mkdirAnnotVocab();
   }
